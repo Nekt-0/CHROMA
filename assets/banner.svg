@@ -19,5 +19,5 @@
 
 <path d="M80 461H1520" stroke="#2b4439"/>
 <text x="84" y="520" fill="#cfff63" font-family="Consolas,'Courier New',monospace" font-size="22">01  SCAN</text><text x="439" y="520" fill="#f2f5e9" font-family="Consolas,'Courier New',monospace" font-size="22">02  TRACK</text><text x="794" y="520" fill="#cfff63" font-family="Consolas,'Courier New',monospace" font-size="22">03  PRIORITIZE</text><text x="1149" y="520" fill="#f2f5e9" font-family="Consolas,'Courier New',monospace" font-size="22">04  RECORD</text>
-<text x="84" y="590" fill="#648477" font-family="Consolas,'Courier New',monospace" font-size="15">PUBLIC MARKET DATA  /  LOCAL JOURNAL  /  EXPLAINABLE RULES  /  v0.1</text>
+<text x="84" y="590" fill="#648477" font-family="Consolas,'Courier New',monospace" font-size="15">DEMO  /  SCAN  /  TRADE  /  LOCAL RECEIPTS  /  v0.2</text>
 </svg>
