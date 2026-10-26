@@ -1,4 +1,4 @@
-import { clean } from './config.mjs';
+import { clean, VERSION } from './config.mjs';
 
 export const money = value => value === null || value === undefined ? 'n/a'
   : value >= 1_000_000 ? `$${(value / 1_000_000).toFixed(2)}m`
@@ -12,7 +12,7 @@ export function frame(sweep, { width = 110, height = 38, selected = 0, view = 'q
   const lines = [];
   const add = value => lines.push(clean(value, width));
   const rule = () => add('─'.repeat(width));
-  add('  C H R O M A                                           / RESEARCH TERMINAL   v0.1.0');
+  add(`  C H R O M A                                           / SCAN + TRADE   v${VERSION}`);
   add('  SEE THE SIGNAL. KEEP THE RECEIPT.');
   rule();
   add(`  ${sweep.mode === 'DEMO' ? 'DEMO / SYNTHETIC TARGETS / NO NETWORK' : 'LIVE READ / DEX SCREENER / NO SIGNING'}`);
@@ -48,7 +48,7 @@ export function frame(sweep, { width = 110, height = 38, selected = 0, view = 'q
     if (!events.length) add('  No persisted events. Demo never writes a trading history.');
     for (const event of events.slice(-12)) {
       const item = event.data.target;
-      add(`  #${String(event.seq).padEnd(4)} ${event.at.slice(11, 19)}  ${column(event.type, 16)} ${item?.symbol ?? event.data.token ?? event.data.report?.verification ?? ''}`);
+      add(`  #${String(event.seq).padEnd(4)} ${event.at.slice(11, 19)}  ${column(event.type, 16)} ${item?.symbol ?? event.data.token ?? event.data.signature ?? event.data.report?.verification ?? ''}`);
       if (event.data.transition) add(`                   ${event.data.transition.previousStatus ?? 'NEW'} → ${event.data.transition.status}`);
     }
     add('');
@@ -76,7 +76,7 @@ export function frame(sweep, { width = 110, height = 38, selected = 0, view = 'q
   for (const error of sweep.errors.slice(0, 3)) add(`  ERROR ${error.token}: ${error.message}`);
   add('');
   rule();
-  add(`  ${message || 'Research terminal / market data can be delayed / no wallet connection required'}`);
+  add(`  ${message || 'SCAN mode / market data can be delayed / execution is a separate trade command'}`);
   add('  ↑/↓ select   1/2/3 views   r refresh   e export JSON   q quit');
   if (height < lines.length) {
     const footer = lines.slice(-3);

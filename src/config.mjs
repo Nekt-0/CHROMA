@@ -1,4 +1,4 @@
-export const VERSION = '0.1.0';
+export const VERSION = '0.2.0';
 export const RULES = Object.freeze({
   minLiquidityUsd: 10_000,
   minVolumeH1Usd: 5_000,
