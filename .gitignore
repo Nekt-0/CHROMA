@@ -9,3 +9,8 @@ exports/
 coverage/
 .DS_Store
 Thumbs.db
+.keys/
+wallets/
+id.json
+*keypair*.json
+*secret*.json

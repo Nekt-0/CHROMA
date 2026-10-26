@@ -3,8 +3,8 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Node.js-22%2B-cfff63?style=flat-square&amp;labelColor=07110f" alt="Node.js 22 or newer">
   <img src="https://img.shields.io/badge/chain-Solana-62e7d6?style=flat-square&amp;labelColor=07110f" alt="Solana">
-  <img src="https://img.shields.io/badge/mode-read_only-cfff63?style=flat-square&amp;labelColor=07110f" alt="Read only">
-  <img src="https://img.shields.io/badge/runtime_dependencies-0-9682ff?style=flat-square&amp;labelColor=07110f" alt="Zero runtime dependencies">
+  <img src="https://img.shields.io/badge/modes-DEMO%20%2F%20SCAN%20%2F%20TRADE-cfff63?style=flat-square&amp;labelColor=07110f" alt="Modes: DEMO, SCAN and TRADE">
+  <img src="https://img.shields.io/badge/execution-Jupiter_Metis-9682ff?style=flat-square&amp;labelColor=07110f" alt="Jupiter Metis execution">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-cfff63?style=flat-square&amp;labelColor=07110f" alt="MIT license"></a>
 </p>
 
@@ -18,7 +18,13 @@ A balance chart says where a session ended. It rarely explains what entered the 
 
 CHROMA puts the target, its estimated market values, its tracking status and its observations in one workflow. Every saved snapshot includes the measurements, the rule thresholds and the status transition. Provider failures are recorded too.
 
-**v0.1 is a working, read-only research build.** Live mode reads DEX Screener market data. Demo mode is an independent, reproducible walkthrough with five synthetic targets. This release does not execute or simulate trades, connect a wallet, or claim a profitable strategy.
+**v0.2 supports DEMO, SCAN and TRADE.** SCAN reads DEX Screener market data and maintains the research queue. TRADE adds Jupiter quotes, unsigned transaction simulation and explicit mainnet swap execution with a local wallet. DEMO remains an independent walkthrough with five synthetic targets.
+
+| Mode | What it does |
+| --- | --- |
+| **DEMO** | Runs synthetic snapshots offline. |
+| **SCAN** | Reads live markets, ranks candidates and records observations. |
+| **TRADE** | Previews and simulates Jupiter swaps; `--execute` enables signing and submission after per-order confirmation. |
 
 ## Run in 30 seconds
 
@@ -30,7 +36,7 @@ cd CHROMA
 node src/cli.mjs demo
 ```
 
-No packages, API keys or configuration are required. In an interactive terminal, `demo` opens the full-screen interface. For a static printout:
+The scanner and demo need no package installation, API keys or wallet. In an interactive terminal, `demo` opens the full-screen interface. For a static printout:
 
 ```bash
 node src/cli.mjs demo --once
@@ -78,6 +84,45 @@ node src/cli.mjs watch --tokens So11111111111111111111111111111111111111112
 CHROMA selects the deepest eligible **base-token** pair by reported USD liquidity. It does not average unrelated pools or use a quote-side token's base price. If the selected pair changes, the event is labelled `PAIR_CHANGED` and the cross-pool price delta is suppressed.
 
 Discovery follows the provider's latest profiles. It is a bounded, potentially promoted subset, not a complete feed of new mints. Public data may lag, be incomplete or be manipulated. [Provider API reference](https://docs.dexscreener.com/api/reference).
+
+## Execute real swaps
+
+Install the trading SDK with pnpm 11.25.0:
+
+```bash
+pnpm install --frozen-lockfile --ignore-scripts
+
+# Public quote: 0.001 SOL → USDC, no wallet or signature
+node src/cli.mjs quote --amount-sol 0.001 --output-mint EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v
+```
+
+For an unsigned preview, add your public address:
+
+```bash
+node src/cli.mjs trade --taker YOUR_PUBLIC_ADDRESS --amount-sol 0.001 --output-mint EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v
+```
+
+For execution, use a local Solana CLI keypair file and explicitly enable submission:
+
+```bash
+node src/cli.mjs trade --wallet /absolute/path/to/id.json --amount-sol 0.001 --output-mint EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v --execute
+```
+
+The command displays the exact mints, atomic token amounts, minimum output, price impact and fee estimates. It inspects the assembled transaction, simulates it on mainnet and asks you to type `SWAP` followed by the wallet's displayed suffix. An expired order must be reviewed again. Scanning never triggers an order automatically.
+
+Defaults are 50 bps slippage, 5% maximum quoted price impact, 100 bps maximum token fee, 10,000 lamports maximum encoded priority fee and 5,000,000 lamports maximum **quoted** SOL fees including rent. These are configurable checks, not guarantees about future prices or an external provider's estimates. Minimum output is reported before any separately collected token fee.
+
+This implementation supports self-funded **v0 Metis** routes using the reviewed Jupiter `route` and `sharedAccountsRoute` instruction layouts. Other routers, gasless orders, extra signers, unsupported instructions and unexpected token destinations are rejected. Some otherwise valid Jupiter routes will therefore be unavailable.
+
+Use `JUPITER_API_KEY` if Jupiter requires authenticated access, `SOLANA_RPC_URL` for your HTTPS mainnet RPC, and optionally `CHROMA_WALLET` for a local keypair path. [`.env.example`](.env.example) documents the variables; Node can load a local file with `--env-file=.env`.
+
+Every submission attempt records its signature **before** the network request. An ambiguous timeout stays `UNKNOWN`; the code never retries the submission automatically. Reconcile with:
+
+```bash
+node src/cli.mjs trade-status --signature YOUR_TRANSACTION_SIGNATURE
+```
+
+Public quote access has been checked against Jupiter. Signing, rejection paths and submission recovery are covered by mocked tests; no funded mainnet trade was performed during development. [Trading reference and setup](docs/TRADING.md).
 
 ## Eight checks you can inspect
 
@@ -141,7 +186,7 @@ node --test
 node scripts/brand.mjs
 ```
 
-Tests cover exact SOL deltas, external flows, provider normalization, missing measurements, pair selection, status gates, pair changes, journal integrity, locking and CLI workflows. CI is configured for Node 22 / 24 on Linux and Windows; remote CI results are available after publication.
+Tests cover scanner logic, journal integrity, exact SOL arithmetic, transaction intent checks, unsigned previews, cryptographic signing, per-order confirmation, failed simulations and ambiguous execution responses. CI runs on Node 22 / 24 on Linux and Windows.
 
 | Available now | Next work |
 | --- | --- |
@@ -150,9 +195,17 @@ Tests cover exact SOL deltas, external flows, provider normalization, missing me
 | Eight visible market checks | Contract and holder-risk adapters |
 | Interactive queue and history | Persistent named watchlists |
 | JSON / Markdown receipts | Measured evaluation over recorded sessions |
+| Jupiter quotes, simulation and explicit swap execution | Additional reviewed routers and transaction layouts |
 
 See [architecture](docs/ARCHITECTURE.md), [command reference](docs/COMMANDS.md), [security notes](SECURITY.md) and [contributing](CONTRIBUTING.md).
 
-Created by [Nekt0](https://github.com/Nekt-0). [MIT licensed](LICENSE).
+## Contributors
+
+| Contributor | Credit |
+| --- | --- |
+| [Nekt0](https://github.com/Nekt-0) | Project creator and maintainer |
+| [Claude](https://claude.ai) | AI contributor credit |
+
+[MIT licensed](LICENSE).
 
 **A scanner should earn its place through repeatable results.**

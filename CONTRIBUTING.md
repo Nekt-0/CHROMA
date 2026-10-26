@@ -6,4 +6,6 @@ Keep provider adapters separate from the deterministic engine. Preserve the dist
 
 Run `node scripts/check.mjs` and `node --test`. Tests must not depend on live endpoints. When a change affects the terminal renderer, regenerate README assets with `node scripts/brand.mjs` and inspect them. A manual `doctor --probe` or `scan` is useful for provider changes; report its time and limitations.
 
-Do not add unlabelled synthetic results, fabricated performance, wallet secrets or trade-execution behavior to this read-only release.
+Trade changes must preserve transaction intent validation, unsigned simulation, per-order confirmation, signature recording before submission and UNKNOWN outcome recovery. Tests must use deterministic test-only keypairs and mocked execution endpoints. Never fund the test fixtures or include private keys in receipts.
+
+Do not add unlabelled synthetic results, fabricated performance or wallet secrets. Project credits, including Claude, are listed in the README; GitHub's automatic contributor graph is derived separately from commit authorship.

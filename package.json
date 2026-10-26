@@ -1,11 +1,15 @@
 {
   "name": "chroma-scan",
-  "version": "0.1.0",
-  "description": "CHROMA — a local Solana research terminal with explainable checks and a traceable target history.",
+  "version": "0.2.0",
+  "description": "CHROMA — Solana scanning, explainable checks and explicit Jupiter swap execution with traceable receipts.",
   "type": "module",
   "private": true,
-  "engines": { "node": ">=22" },
-  "bin": { "chroma": "./src/cli.mjs" },
+  "engines": {
+    "node": ">=22"
+  },
+  "bin": {
+    "chroma": "./src/cli.mjs"
+  },
   "scripts": {
     "start": "node src/cli.mjs demo",
     "demo": "node src/cli.mjs demo --once",
@@ -16,6 +20,22 @@
   },
   "license": "MIT",
   "author": "Nekt0",
-  "repository": { "type": "git", "url": "https://github.com/Nekt-0/CHROMA.git" },
-  "keywords": ["solana", "scanner", "terminal", "research", "chroma"]
+  "contributors": [
+    { "name": "Claude", "url": "https://claude.ai" }
+  ],
+  "packageManager": "pnpm@11.25.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Nekt-0/CHROMA.git"
+  },
+  "keywords": [
+    "solana",
+    "scanner",
+    "terminal",
+    "research",
+    "chroma"
+  ],
+  "dependencies": {
+    "@solana/web3.js": "1.99.0"
+  }
 }
