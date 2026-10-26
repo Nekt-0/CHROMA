@@ -204,7 +204,7 @@ See [architecture](docs/ARCHITECTURE.md), [command reference](docs/COMMANDS.md),
 | Contributor | Credit |
 | --- | --- |
 | [Nekt0](https://github.com/Nekt-0) | Project creator and maintainer |
-| [Claude](https://claude.ai) | AI contributor credit |
+| [Claude](https://github.com/claude) | AI contributor credit |
 
 [MIT licensed](LICENSE).
 
