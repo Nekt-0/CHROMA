@@ -1,0 +1,21 @@
+{
+  "name": "chroma-scan",
+  "version": "0.1.0",
+  "description": "CHROMA — a local Solana research terminal with explainable checks and a traceable target history.",
+  "type": "module",
+  "private": true,
+  "engines": { "node": ">=22" },
+  "bin": { "chroma": "./src/cli.mjs" },
+  "scripts": {
+    "start": "node src/cli.mjs demo",
+    "demo": "node src/cli.mjs demo --once",
+    "scan": "node src/cli.mjs scan --discover",
+    "watch": "node src/cli.mjs watch --discover",
+    "test": "node --test",
+    "check": "node scripts/check.mjs"
+  },
+  "license": "MIT",
+  "author": "Nekt0",
+  "repository": { "type": "git", "url": "https://github.com/Nekt-0/CHROMA.git" },
+  "keywords": ["solana", "scanner", "terminal", "research", "chroma"]
+}
