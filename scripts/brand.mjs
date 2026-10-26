@@ -25,7 +25,7 @@ const banner = `<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="640
 
 <path d="M80 461H1520" stroke="#2b4439"/>
 ${['01  SCAN', '02  TRACK', '03  PRIORITIZE', '04  RECORD'].map((label, i) => `<text x="${84 + i * 355}" y="520" fill="${i % 2 ? '#f2f5e9' : '#cfff63'}" font-family="Consolas,'Courier New',monospace" font-size="22">${label}</text>`).join('')}
-<text x="84" y="590" fill="#648477" font-family="Consolas,'Courier New',monospace" font-size="15">PUBLIC MARKET DATA  /  LOCAL JOURNAL  /  EXPLAINABLE RULES  /  v0.1</text>
+<text x="84" y="590" fill="#648477" font-family="Consolas,'Courier New',monospace" font-size="15">DEMO  /  SCAN  /  TRADE  /  LOCAL RECEIPTS  /  v0.2</text>
 </svg>`;
 writeFileSync('assets/banner.svg', banner);
 
