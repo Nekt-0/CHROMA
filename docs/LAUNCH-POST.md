@@ -20,7 +20,7 @@ The first CHROMA source release includes:
 → JSON and Markdown receipts
 → A separate, clearly labelled five-target synthetic demo
 
-This is a read-only research build. It does not execute trades or reproduce the original session. The implementation and its limitations are available for inspection and testing.
+CHROMA now has DEMO, SCAN and TRADE modes. TRADE adds Jupiter quotes, unsigned simulation and explicit swap execution after a local wallet signs a reviewed order. Scanner scores do not automatically trigger trades. The implementation does not reproduce or verify the original session; its supported transaction layouts and test coverage are documented in the repository.
 
 Run the offline walkthrough, inspect the rules and challenge the results.
 
