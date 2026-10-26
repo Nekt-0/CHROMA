@@ -35,7 +35,8 @@ test('session → verify → export is usable across independent CLI invocations
 test('invalid amounts and accidental command arguments fail before writing state', t => {
   const dir = mkdtempSync(join(tmpdir(), 'chroma-invalid-'));
   t.after(() => rmSync(dir, { recursive: true, force: true }));
-  for (const args of [['session', '--start', '-1', '--end', '310'], ['scan'], ['scan', '--tokens', 'bad'], ['verify', 'oops']]) {
+  for (const args of [['session', '--start', '-1', '--end', '310'], ['scan'], ['scan', '--tokens', 'bad'], ['verify', 'oops'],
+    ['trade', '--execute'], ['demo', '--execute'], ['trade', '--amount', '1.5'], ['quote', '--amount-sol', '1', '--amount', '10']]) {
     assert.equal(run(args, dir).status, 1);
   }
   assert.deepEqual(readdirSync(dir), []);
