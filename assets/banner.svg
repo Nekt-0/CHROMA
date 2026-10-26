@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="640" viewBox="0 0 1600 640" role="img" aria-label="CHROMA. See the signal. Keep the receipt. Solana research terminal.">
+<defs>
+ <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#28403a"/></pattern>
+ <linearGradient id="beam"><stop stop-color="#cfff63"/><stop offset=".5" stop-color="#62e7d6"/><stop offset="1" stop-color="#9682ff"/></linearGradient>
+ <radialGradient id="glow"><stop stop-color="#345448" stop-opacity=".4"/><stop offset="1" stop-color="#07110f" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="1600" height="640" fill="#07110f"/><rect width="1600" height="640" fill="url(#grid)"/>
+<ellipse cx="1280" cy="260" rx="360" ry="300" fill="url(#glow)"/>
+<path d="M0 0H1600" stroke="url(#beam)" stroke-width="8"/>
+<text x="80" y="79" fill="#98b5a9" font-family="Consolas,'Courier New',monospace" font-size="16" letter-spacing="4">NEKT0 / SOLANA RESEARCH SYSTEM</text>
+<text x="72" y="264" fill="#f2f5e9" font-family="Arial,Helvetica,sans-serif" font-weight="900" font-size="178" letter-spacing="-8">CHROMA</text>
+<text x="82" y="338" fill="#cfff63" font-family="Arial,Helvetica,sans-serif" font-size="42" font-weight="600">See the signal. Keep the receipt.</text>
+<text x="84" y="391" fill="#98b5a9" font-family="Consolas,'Courier New',monospace" font-size="19">Eight market checks. One traceable target history.</text>
+<g fill="none" stroke-width="2"><path d="M1020 300L1246 112L1468 300L1246 486Z" stroke="#426454"/>
+<path d="M1246 112L1246 486M1020 300H1468M1020 300L1357 206L1357 394Z" stroke="#28463b"/>
+<path d="M1000 300H1160L1246 210L1332 300L1246 390L1160 300" stroke="url(#beam)" stroke-width="4"/>
+<path d="M1332 300L1540 173" stroke="#cfff63"/><path d="M1332 300H1540" stroke="#62e7d6"/><path d="M1332 300L1540 427" stroke="#9682ff"/></g>
+<circle cx="1246" cy="300" r="12" fill="#cfff63"/>
+
+<path d="M80 461H1520" stroke="#2b4439"/>
+<text x="84" y="520" fill="#cfff63" font-family="Consolas,'Courier New',monospace" font-size="22">01  SCAN</text><text x="439" y="520" fill="#f2f5e9" font-family="Consolas,'Courier New',monospace" font-size="22">02  TRACK</text><text x="794" y="520" fill="#cfff63" font-family="Consolas,'Courier New',monospace" font-size="22">03  PRIORITIZE</text><text x="1149" y="520" fill="#f2f5e9" font-family="Consolas,'Courier New',monospace" font-size="22">04  RECORD</text>
+<text x="84" y="590" fill="#648477" font-family="Consolas,'Courier New',monospace" font-size="15">PUBLIC MARKET DATA  /  LOCAL JOURNAL  /  EXPLAINABLE RULES  /  v0.1</text>
+</svg>
