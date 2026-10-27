@@ -10,7 +10,7 @@
 
 <p align="center"><strong>A Solana research terminal that remembers why a target entered the queue.</strong><br>Public market snapshots → eight explainable checks → ranked candidates → a local event record.</p>
 
-<p align="center"><a href="#run-in-30-seconds">Run locally</a> · <a href="#the-terminal">Terminal</a> · <a href="#eight-checks-you-can-inspect">Checks</a> · <a href="docs/COMMANDS.md">Commands</a> · <a href="docs/METHODOLOGY.md">Methodology</a> · <a href="docs/README.ru.md">Русский</a></p>
+<p align="center"><a href="#run-in-30-seconds">Run locally</a> · <a href="#the-terminal">Terminal</a> · <a href="#eight-checks-you-can-inspect">Checks</a> · <a href="docs/COMMANDS.md">Commands</a> · <a href="docs/METHODOLOGY.md">Methodology</a></p>
 
 ## Why CHROMA
 
